@@ -16,9 +16,9 @@
     "scenes": {
         "system_editor": [
             "coui://ui/mods/DirectEdit/DirectEdit_core.js",
-			"coui://ui/mods/DirectEdit/DirectEdit.css",
-			"coui://ui/mods/DirectEdit/DirectEdit_panel_main.html",
-			"coui://ui/mods/DirectEdit/DirectEdit_panel_brushDetail.html",
+            "coui://ui/mods/DirectEdit/DirectEdit.css",
+            "coui://ui/mods/DirectEdit/DirectEdit_panel_main.html",
+            "coui://ui/mods/DirectEdit/DirectEdit_panel_brushDetail.html",
             "coui://ui/mods/DirectEdit/DirectEdit_brushes.js",
             "coui://ui/mods/DirectEdit/DirectEdit_sym.js",
             "coui://ui/mods/DirectEdit/DirectEdit_ui.js"
