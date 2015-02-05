@@ -1,0 +1,63 @@
+#dEdit_base {
+	background: rgba(15,15,15,1);
+	border: 1px solid rgba(255,255,255,1);
+	padding: 10px 10px 10px 10px;
+	height: 100%;
+	width: 100%;
+}
+#dEdit_base table{
+	width: 100%;
+}
+#dEdit_base select {
+	width: 100%;
+}
+
+#dEdit_brushDetail_wrapper {
+	background: rgba(15,15,23,1);
+	border: 1px solid rgba(255,255,255,1);
+	padding: 10px 10px 10px 10px;
+	height: 100%;
+	width: 100%;
+}
+#dEdit_brushDetail table{
+	width: 100%;
+}
+#dEdit_brushDetail select {
+	width: 100%;
+}
+
+
+.dEdit_brushRow:hover{
+    background: rgba(191,191,255,1);
+}
+
+.dEdit_specCell {
+	width: 240px;
+}
+
+.dEdit_planetTable {
+	height:500px;
+	overflow:auto;
+}
+
+.dEdit_note {
+	color: rgba(255,255,160,1);
+}
+
+.dEdit_warn {
+	color: rgba(255,0,0,1);
+}
+
+.dEdit_label{
+	vertical-align: bottom;
+}
+
+.dEdit_title {
+	color: rgba(127,191,255,1);
+	font-size: 18px;
+}
+
+.dEdit_version {
+	color: rgba(159,159,159,1);
+	font-size: 16px;
+}

@@ -1,0 +1,163 @@
+<script>
+$(function() {
+	$("#dEdit_planetModeTabs").tabs();
+});
+</script>
+<table>
+	<tr class="dEdit_label">
+		<td>
+			<span class="dEdit_title">DirectEdit</span>
+			<span style="width: 20px"></span>
+			<span class="dEdit_version" data-bind="text: dEdit.version"></span>
+		</td>
+	</tr>
+	<tr id="dEdit_planetSelect">
+		<td>
+			<table id="dEdit_planetSelect_table">
+				<tr>
+					<td>
+						<select id="dEdit_planetSelect_list" data-bind="options: dEdit.listPlanets, optionsText: function(item) { return item.name; }, value: dEdit.selectedPlanet">
+						</select>
+					</td>
+					<td>
+						<button id="dEdit_planetSelect_read" onclick="dEdit.readPlanet()">
+							READ
+						</button>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr id="dEdit_planetDetail">
+		<td>
+			<div id="dEdit_planetModeTabs">
+				<ul>
+					<li><a href="#dEdit_planetModeTab_planet">Planet</a></li>
+					<li><a href="#dEdit_planetModeTab_csg">CSG</a></li>
+					<!--li><a href="#dEdit_planetModeTab_metal">Metal</a></li>
+					<li><a href="#dEdit_planetModeTab_spawns">Spawns</a></li-->
+				</ul>
+				<div id="dEdit_planetModeTab_planet" class="dEdit_planetTable">
+					<table>
+						<tr>
+							<td>Name</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.name"></input></td>
+						</tr>
+						<tr>
+							<td>Mass</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.mass"></input></td>
+						</tr>
+						<tr>
+							<td>Position (x)</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.position_x"></input></td>
+						</tr>
+						<tr>
+							<td>Position (y)</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.position_y"></input></td>
+						</tr>
+						<tr>
+							<td>Velocity (x)</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.velocity_x"></input></td>
+						</tr>
+						<tr>
+							<td>Velocity (y)</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.velocity_y"></input></td>
+						</tr>
+						<tr>
+							<td>Engines to Launch</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.required_thrust_to_move"></input></td>
+						</tr>
+						<tr>
+							<td>Seed</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.seed"></input></td>
+						</tr>
+						<tr>
+							<td>Radius</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.radius"></input></td>
+						</tr>
+						<tr>
+							<td>Biome</td>
+							<td><select data-bind="options: biomes, value: dEdit.currentSpec.planet.biome"></select></td>
+						</tr>
+						<tr>
+							<td>Height Range</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.heightRange"></input></td>
+						</tr>
+						<tr>
+							<td>Water Coverage</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.waterHeight"></input></td>
+						</tr>
+						<tr>
+							<td>Water Depth</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.waterDepth"></input></td>
+						</tr>
+						<tr>
+							<td>Temperature</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.temperature"></input></td>
+						</tr>
+						<tr>
+							<td>Metal Density</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.metalDensity"></input></td>
+						</tr>
+						<tr>
+							<td>Metal Clusters</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.metalClusters"></input></td>
+						</tr>
+						<tr>
+							<td>Starting planet</td>
+							<td><input type="checkbox" data-bind="checked: dEdit.currentSpec.starting_planet"></input></td>
+						</tr>
+						<tr>
+							<td>LZ Per Army</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.landingZonesPerArmy"></input></td>
+						</tr>
+						<tr>
+							<td>LZ Size</td>
+							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.landingZoneSize"></input></td>
+						</tr>
+						<tr>
+							<td>Symmetry Type</td>
+							<td><select data-bind="options: symmetryTypes, value: dEdit.currentSpec.planet.symmetryType"></select></td>
+						</tr>
+						<tr data-bind="visible: dEdit.currentSpec.planet.symmetryType() === 'terrain and CSG'">
+							<td colspan="2" class="dEdit_warn">WARNING: paired brushes will be unlinked when writing planet</td>
+						</tr>
+						<tr>
+							<td>N/S Mirrored Metal</td>
+							<td><input type="checkbox" data-bind="checked: dEdit.currentSpec.planet.symmetricalMetal"></input></td>
+						</tr>
+						<tr>
+							<td>N/S Mirrored LZ</td>
+							<td><input type="checkbox" data-bind="checked: dEdit.currentSpec.planet.symmetricalStarts"></input></td>
+						</tr>
+					</table>
+				</div>
+				<div id="dEdit_planetModeTab_csg" class="dEdit_planetTable">
+					<div class="dEdit_note" data-bind="visible: dEdit.currentSpec.noBrushes">No custom CSG (default terrain generation)</div>
+					<table data-bind="foreach: dEdit.currentSpec.rootBrushGroup.members">
+						<tr class="dEdit_brushRow" data-bind="click: $root.dEdit.brushDetail.viewBrush">
+							<td id="dEdit_charCell" data-bind="text: /([^/.]+)(?=\.)/.exec(spec())[0]"></td>
+							<td id="dEdit_charCell" data-bind="text: !!mirrored() ? '%' : ' '"></td>
+							<td id="dEdit_charCell" data-bind="text: !!pathable() ? 'P' : ' '"></td>
+							<td id="dEdit_charCell" data-bind="text: !!mergeable() ? 'M' : ' '"></td>
+							<td id="dEdit_charCell" data-bind="text: !!no_features() ? 'N' : ' '"></td>
+						</tr>
+					</table>
+				</div>
+				<!--div id="dEdit_planetModeTab_metal" class="dEdit_planetTable">
+					<div class="dEdit_note" data-bind="visible: dEdit.currentSpec.noMetal">No custom metal spots (default metal generation)</div>
+				</div>
+				<div id="dEdit_planetModeTab_spawns" class="dEdit_planetTable">
+					<div class="dEdit_note" data-bind="visible: dEdit.currentSpec.noLZ">No custom landing zones (default spawns)</div>
+				</div-->
+			</div>
+		</td>
+	</tr>
+	<tr id="dEdit_planetCommit">
+		<td>
+			<button id="dEdit_planetCommit_write" onclick="dEdit.writePlanet()">
+				WRITE
+			</button>
+		</td>
+	</tr>
+</table>

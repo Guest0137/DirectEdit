@@ -1,0 +1,34 @@
+{
+    "context": "client",
+    "identifier": "com.pa.guest.DirectEdit",
+    "display_name": "DirectEdit",
+    "description": "A precise and unrestricted interface for system editing.",
+    "author": "Guest",
+    "version": "0.2.0 [WIP]",
+    "build": "77725",
+    "date": "2015/04/03",
+    "signature": "not yet implemented",
+    "forum": "",
+    "category": [
+        "system-editor",
+        "ui"
+    ],
+    "scenes": {
+        "system_editor": [
+            "coui://ui/mods/DirectEdit/DirectEdit_core.js",
+			"coui://ui/mods/DirectEdit/DirectEdit.css",
+			"coui://ui/mods/DirectEdit/DirectEdit_panel_main.html",
+			"coui://ui/mods/DirectEdit/DirectEdit_panel_brushDetail.html",
+            "coui://ui/mods/DirectEdit/DirectEdit_brushes.js",
+            "coui://ui/mods/DirectEdit/DirectEdit_sym.js",
+            "coui://ui/mods/DirectEdit/DirectEdit_ui.js"
+        ]
+    },
+    "id": "DirectEdit",
+    "icon": "",
+    "priority": 137,
+    "enabled": true,
+	"dependencies": [
+		"com.pa.raevn.rfloatframe"
+	]
+}

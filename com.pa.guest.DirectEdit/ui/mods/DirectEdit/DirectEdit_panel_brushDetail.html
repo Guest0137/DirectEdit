@@ -1,0 +1,150 @@
+<script>
+$(function() {
+	$("#dEdit_brushDetailTabs").tabs();
+});
+</script>
+<div id="dEdit_brushDetail_wrapper">
+	<button data-bind="click: dEdit.brushDetail.hide">Hide</button>
+	<div id="dEdit_brushDetailTabs">
+		<ul>
+			<li><a href="#dEdit_brushDetailTab_prop">Properties</a></li>
+			<li><a href="#dEdit_brushDetailTab_sym">Symmetry</a></li>
+		</ul>
+		<div id="dEdit_brushDetailTab_prop">
+			<table>
+				<tr>
+					<td>Model</td>
+					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().spec"></input></td>
+				</tr>
+				<tr>
+					<td>Projection Type</td>
+					<td>
+						<select data-bind="value: dEdit.brushDetail.currentBrush().proj">
+							<option value="BP_None">None</option>
+							<option value="BP_Bend">Bend</option>
+							<option value="BP_Arch">Arch</option>
+							<option value="BP_Longitude">Longitude</option>
+							<option value="BP_LongitudePinch">LongitudePinch</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Operation</td>
+					<td>
+						<select data-bind="value: dEdit.brushDetail.currentBrush().op">
+							<option value="BO_Add">Add</option>
+							<option value="BO_Subtract">Subtract</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Rotation</td>
+					<td><input type="text" data-bind="value: dEdit.brushDetail.psi"></input></td>
+				</tr>
+				<tr>
+					<td>Scale</td>
+					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().scale[0]"></input></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().scale[1]"></input></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().scale[2]"></input></td>
+				</tr>
+				<tr>
+					<td>Height</td>
+					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().height"></input></td>
+				</tr>
+			</table>
+			<!--button data-bind="click: dEdit.brushDetail.toggleCoordinateMode">Coordinate Mode</button>
+			<table data-bind="visible: dEdit.brushDetail.spherical()">
+				<tr>
+					<td>Theta</td>
+					<td><input type="text" data-bind="value: dEdit.brushDetail.theta"></input></td>
+				</tr>
+				<tr>
+					<td>Phi</td>
+					<td><input type="text" data-bind="value: dEdit.brushDetail.phi"></input></td>
+				</tr>
+			</table-->
+			<table>
+				<tr>
+					<td>Position</td>
+					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().position[0]"></input></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().position[1]"></input></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="text" data-bind="value: dEdit.brushDetail.z"></input></td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td>Mirrored</td>
+					<td><input type="checkbox" data-bind="checked: dEdit.brushDetail.orientationReversed"></input></td>
+				</tr>
+				<tr>
+					<td>Pathable</td>
+					<td><input type="checkbox" data-bind="checked: dEdit.brushDetail.currentBrush().pathable"></input></td>
+				</tr>
+				<tr>
+					<td>Mergeable</td>
+					<td><input type="checkbox" data-bind="checked: dEdit.brushDetail.currentBrush().mergeable"></input></td>
+				</tr>
+				<tr>
+					<td>No Features</td>
+					<td><input type="checkbox" data-bind="checked: dEdit.brushDetail.currentBrush().no_features"></input></td>
+				</tr>
+			</table>
+			<button data-bind="click: dEdit.brushDetail.shiftCurrentUp">UP</button>
+			<button data-bind="click: dEdit.brushDetail.shiftCurrentDown">DOWN</button>
+			<button data-bind="click: dEdit.brushDetail.cloneCurrent">CLONE</button>
+			<button data-bind="click: dEdit.brushDetail.removeCurrent">DELETE</button>
+		</div>
+		<div id="dEdit_brushDetailTab_sym">
+			<span class="dEdit_note">Rotations aren't being set correctly right now. I'll fix that eventually.</span>
+			<select data-bind="options: dEdit.brushOpsArray, optionsText: function(item) { return item.name; }, value: dEdit.currentOp.type">
+			</select>
+			<table>
+				<tr data-bind="visible: dEdit.currentOp.type().activeFields.vector">
+					<td>Vector</td>
+					<td>
+						<input type="text" data-bind="value: dEdit.currentOp.vector[0]"></input>
+						<input type="text" data-bind="value: dEdit.currentOp.vector[1]"></input>
+						<input type="text" data-bind="value: dEdit.currentOp.vector[2]"></input>
+					</td>
+				</tr>
+				<tr data-bind="visible: dEdit.currentOp.type().activeFields.relative">
+					<td>Relative</td>
+					<td><input type="text" data-bind="value: dEdit.currentOp.relative"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.currentOp.type().activeFields.absolute">
+					<td>Absolute</td>
+					<td><input type="text" data-bind="value: dEdit.currentOp.absolute"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.currentOp.type().activeFields.angle">
+					<td>Angle</td>
+					<td><input type="text" data-bind="value: dEdit.currentOp.angle"></input></td>
+				</tr>
+			</table>
+			<table>
+				<tr data-bind="visible: dEdit.currentOp.isValid">
+					<td><button style="width: 100%" onclick="dEdit.applyOpToCurrent()">Apply</button></td>
+					<td><button style="width: 100%" onclick="dEdit.applyOpToCurrentClone()">Clone & Apply</button></td>
+				</tr>
+				<tr data-bind="visible: !dEdit.currentOp.isValid()">
+					<td colspan="2" class="dEdit_note">
+						The selected operation can be applied once all required fields are filled.
+						<p>
+						You may need to press <b>tab</b> before changes take effect.
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
