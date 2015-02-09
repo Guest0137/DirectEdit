@@ -1,7 +1,3 @@
-/* Some of the framework here is intended for use with brush groups
-   once I get those working, so some stuff is overcomplicated.
-*/
-
 model.dEdit.currentSpec.rootBrushGroup = {};
 model.dEdit.currentSpec.rootBrushGroup.members = ko.observableArray();
 model.dEdit.currentSpec.rootBrushGroup.getWritable = function() {
@@ -12,10 +8,11 @@ model.dEdit.currentSpec.rootBrushGroup.getWritable = function() {
 	var image = model.dEdit.currentSpec.rootBrushGroup.members();
 	
 	for (i = 0; i < image.length; i++) {
-		var info = image[i].getWritable();
-		writableBrushes = writableBrushes.concat(info.brushes);
+		
+		writableBrushes = writableBrushes.concat(image[i].getWritable());
 	}
-	return {brushes: writableBrushes};
+	
+	return writableBrushes;
 };
 
 model.dEdit.currentSpec.noBrushes = ko.computed( function() {
@@ -25,6 +22,9 @@ model.dEdit.currentSpec.noBrushes = ko.computed( function() {
 dEdit.BrushWrapper = function(brush) {
 	var self = this;
 	self.original = brush;
+	
+	// display stuff
+	self.isSelected = ko.observable(false);
 	
 	// weight doesn't matter
 	self.spec = ko.observable(self.original.spec);
@@ -94,7 +94,7 @@ dEdit.BrushWrapper = function(brush) {
 		brushSpec.mergeable = self.mergeable();
 		brushSpec.no_features = self.no_features();
 		
-		return {brushes: [brushSpec]};
+		return brushSpec;
 	};
 };
 

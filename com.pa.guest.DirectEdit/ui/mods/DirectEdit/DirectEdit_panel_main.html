@@ -41,39 +41,39 @@ $(function() {
 					<table>
 						<tr>
 							<td>Name</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.name"></input></td>
+							<td><input type="text" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.name"></input></td>
 						</tr>
 						<tr>
 							<td>Mass</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.mass"></input></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.mass"></input></td>
 						</tr>
 						<tr>
-							<td>Position (x)</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.position_x"></input></td>
+							<td>Position<span class="dEdit_xyz">(x)</span></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.position_x"></input></td>
 						</tr>
 						<tr>
-							<td>Position (y)</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.position_y"></input></td>
+							<td><span class="dEdit_xyz">(y)</span></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.position_y"></input></td>
 						</tr>
 						<tr>
-							<td>Velocity (x)</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.velocity_x"></input></td>
+							<td>Velocity<span class="dEdit_xyz">(x)</span></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.velocity_x"></input></td>
 						</tr>
 						<tr>
-							<td>Velocity (y)</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.velocity_y"></input></td>
+							<td><span class="dEdit_xyz">(y)</span></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.velocity_y"></input></td>
 						</tr>
 						<tr>
 							<td>Engines to Launch</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.required_thrust_to_move"></input></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.required_thrust_to_move"></input></td>
 						</tr>
 						<tr>
 							<td>Seed</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.seed"></input></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.seed"></input></td>
 						</tr>
 						<tr>
 							<td>Radius</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.radius"></input></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.radius"></input></td>
 						</tr>
 						<tr>
 							<td>Biome</td>
@@ -81,27 +81,27 @@ $(function() {
 						</tr>
 						<tr>
 							<td>Height Range</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.heightRange"></input></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.heightRange"></input></td>
 						</tr>
 						<tr>
 							<td>Water Coverage</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.waterHeight"></input></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.waterHeight"></input></td>
 						</tr>
 						<tr>
 							<td>Water Depth</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.waterDepth"></input></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.waterDepth"></input></td>
 						</tr>
 						<tr>
 							<td>Temperature</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.temperature"></input></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.temperature"></input></td>
 						</tr>
 						<tr>
 							<td>Metal Density</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.metalDensity"></input></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.metalDensity"></input></td>
 						</tr>
 						<tr>
 							<td>Metal Clusters</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.metalClusters"></input></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.metalClusters"></input></td>
 						</tr>
 						<tr>
 							<td>Starting planet</td>
@@ -109,11 +109,11 @@ $(function() {
 						</tr>
 						<tr>
 							<td>LZ Per Army</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.landingZonesPerArmy"></input></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.landingZonesPerArmy"></input></td>
 						</tr>
 						<tr>
 							<td>LZ Size</td>
-							<td><input type="text" data-bind="value: dEdit.currentSpec.planet.landingZoneSize"></input></td>
+							<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.landingZoneSize"></input></td>
 						</tr>
 						<tr>
 							<td>Symmetry Type</td>
@@ -135,12 +135,13 @@ $(function() {
 				<div id="dEdit_planetModeTab_csg" class="dEdit_planetTable">
 					<div class="dEdit_note" data-bind="visible: dEdit.currentSpec.noBrushes">No custom CSG (default terrain generation)</div>
 					<table data-bind="foreach: dEdit.currentSpec.rootBrushGroup.members">
-						<tr class="dEdit_brushRow" data-bind="click: $root.dEdit.brushDetail.viewBrush">
-							<td id="dEdit_charCell" data-bind="text: /([^/.]+)(?=\.)/.exec(spec())[0]"></td>
-							<td id="dEdit_charCell" data-bind="text: !!mirrored() ? '%' : ' '"></td>
-							<td id="dEdit_charCell" data-bind="text: !!pathable() ? 'P' : ' '"></td>
-							<td id="dEdit_charCell" data-bind="text: !!mergeable() ? 'M' : ' '"></td>
-							<td id="dEdit_charCell" data-bind="text: !!no_features() ? 'N' : ' '"></td>
+						<tr class="dEdit_brushRow" data-bind="click: $root.dEdit.brushDetail.viewBrush, css: { dEdit_brushRowSelected: isSelected() }">
+							<td class="dEdit_specCell" data-bind="text: /([^/.]+)(?=\.)/.exec(spec())[0]"></td>
+							<td class="dEdit_charCell"><div class="dEdit_charPlusMinus" data-bind="text: $root.dEdit.opChar(op())"></div></td>
+							<td class="dEdit_charCell" data-bind="text: !!mirrored() ? '%' : ' '"></td>
+							<td class="dEdit_charCell" data-bind="text: !!pathable() ? 'P' : ' '"></td>
+							<td class="dEdit_charCell" data-bind="text: !!mergeable() ? 'M' : ' '"></td>
+							<td class="dEdit_charCell" data-bind="text: !!no_features() ? 'N' : ' '"></td>
 						</tr>
 					</table>
 				</div>

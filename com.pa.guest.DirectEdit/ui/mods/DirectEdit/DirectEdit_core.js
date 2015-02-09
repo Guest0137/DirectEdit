@@ -92,16 +92,17 @@ var dEdit = {
 			spec.source = {};
 		}
 		
-		var info = c.rootBrushGroup.getWritable();
+		var br = c.rootBrushGroup.getWritable();
 		
-		spec.source.brushes = info.brushes;
-		spec.planetCSG = info.brushes;
+		spec.source.brushes = br;
+		spec.planetCSG = br;
 		
 		return spec;
 	},
 	
     // Load a copy of the chosen planet for editing
     readPlanet: function() {
+		model.dEdit.brushDetail.hide();
         dEdit.readPlanetSpec(model.dEdit.selectedPlanet());
     },
 	
@@ -139,7 +140,7 @@ var dEdit = {
 
 // Initialize model observables
 model.dEdit = {
-	version: "0.2.0 (Work in Progress)",
+	version: "0.2.1 (Work in Progress)",
 	currentSpec: {
 
 		name: ko.observable(),

@@ -14,7 +14,7 @@ $(function() {
 			<table>
 				<tr>
 					<td>Model</td>
-					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().spec"></input></td>
+					<td><input type="text" data-bind="valueUpdate: 'afterkeydown', value: dEdit.brushDetail.currentBrush().spec"></input></td>
 				</tr>
 				<tr>
 					<td>Projection Type</td>
@@ -39,48 +39,35 @@ $(function() {
 				</tr>
 				<tr>
 					<td>Rotation</td>
-					<td><input type="text" data-bind="value: dEdit.brushDetail.psi"></input></td>
+					<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.brushDetail.psi"></input></td>
 				</tr>
 				<tr>
-					<td>Scale</td>
-					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().scale[0]"></input></td>
+					<td>Scale<span class="dEdit_xyz">(x)</span></td>
+					<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.brushDetail.currentBrush().scale[0]"></input></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().scale[1]"></input></td>
+					<td><span class="dEdit_xyz">(y)</span></td>
+					<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.brushDetail.currentBrush().scale[1]"></input></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().scale[2]"></input></td>
+					<td><span class="dEdit_xyz">(z)</span></td>
+					<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.brushDetail.currentBrush().scale[2]"></input></td>
 				</tr>
 				<tr>
 					<td>Height</td>
-					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().height"></input></td>
-				</tr>
-			</table>
-			<!--button data-bind="click: dEdit.brushDetail.toggleCoordinateMode">Coordinate Mode</button>
-			<table data-bind="visible: dEdit.brushDetail.spherical()">
-				<tr>
-					<td>Theta</td>
-					<td><input type="text" data-bind="value: dEdit.brushDetail.theta"></input></td>
+					<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.brushDetail.currentBrush().height"></input></td>
 				</tr>
 				<tr>
-					<td>Phi</td>
-					<td><input type="text" data-bind="value: dEdit.brushDetail.phi"></input></td>
-				</tr>
-			</table-->
-			<table>
-				<tr>
-					<td>Position</td>
-					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().position[0]"></input></td>
+					<td>Position<span class="dEdit_xyz">(x)</span></td>
+					<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.brushDetail.currentBrush().position[0]"></input></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td><input type="text" data-bind="value: dEdit.brushDetail.currentBrush().position[1]"></input></td>
+					<td><span class="dEdit_xyz">(y)</span></td>
+					<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.brushDetail.currentBrush().position[1]"></input></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td><input type="text" data-bind="value: dEdit.brushDetail.z"></input></td>
+					<td><span class="dEdit_xyz">(z)</span></td>
+					<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.brushDetail.z"></input></td>
 				</tr>
 			</table>
 			<table>
@@ -114,22 +101,22 @@ $(function() {
 				<tr data-bind="visible: dEdit.currentOp.type().activeFields.vector">
 					<td>Vector</td>
 					<td>
-						<input type="text" data-bind="value: dEdit.currentOp.vector[0]"></input>
-						<input type="text" data-bind="value: dEdit.currentOp.vector[1]"></input>
-						<input type="text" data-bind="value: dEdit.currentOp.vector[2]"></input>
+						<input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentOp.vector[0]"></input>
+						<input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentOp.vector[1]"></input>
+						<input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentOp.vector[2]"></input>
 					</td>
 				</tr>
 				<tr data-bind="visible: dEdit.currentOp.type().activeFields.relative">
 					<td>Relative</td>
-					<td><input type="text" data-bind="value: dEdit.currentOp.relative"></input></td>
+					<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentOp.relative"></input></td>
 				</tr>
 				<tr data-bind="visible: dEdit.currentOp.type().activeFields.absolute">
 					<td>Absolute</td>
-					<td><input type="text" data-bind="value: dEdit.currentOp.absolute"></input></td>
+					<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentOp.absolute"></input></td>
 				</tr>
 				<tr data-bind="visible: dEdit.currentOp.type().activeFields.angle">
 					<td>Angle</td>
-					<td><input type="text" data-bind="value: dEdit.currentOp.angle"></input></td>
+					<td><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentOp.angle"></input></td>
 				</tr>
 			</table>
 			<table>
@@ -140,8 +127,6 @@ $(function() {
 				<tr data-bind="visible: !dEdit.currentOp.isValid()">
 					<td colspan="2" class="dEdit_note">
 						The selected operation can be applied once all required fields are filled.
-						<p>
-						You may need to press <b>tab</b> before changes take effect.
 					</td>
 				</tr>
 			</table>

@@ -26,14 +26,35 @@
 	width: 100%;
 }
 
+.dEdit_xyz {
+	width: 20px;
+	float: right;
+}
 
 .dEdit_brushRow:hover{
     background: rgba(191,191,255,1);
 }
 
-.dEdit_specCell {
-	width: 240px;
+.dEdit_brushRowSelected {
+	background: rgba(128,176,208,1);
 }
+
+.dEdit_specCell {
+	width: 100%;
+}
+
+.dEdit_charCell {
+	min-width: 14px;
+	max-width: 14px;
+}
+
+.dEdit_charPlusMinus {
+	font-size: 120%;
+	min-height: 12px;
+	max-height: 12px;
+	overflow: hidden;
+}
+
 
 .dEdit_planetTable {
 	height:500px;

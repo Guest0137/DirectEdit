@@ -192,6 +192,7 @@ dEdit.brushOps = {
 				cl.position = dEdit.flatten2D(dEdit.matMult(op.matrix,dEdit.columnize(cl.position)));
 				
 				// TODO set rotation properly
+				cl.rotation += op.angle;
 				
 				return cl;
 			};
@@ -286,7 +287,7 @@ dEdit.brushOps = {
 			
 			op.applyTo = function(brushSpec) {
 				var cl = _.cloneDeep(brushSpec);
-				cl.height += delta;
+				cl.height += op.delta;
 				return cl;
 			};
 			
@@ -298,7 +299,86 @@ dEdit.brushOps = {
 			
 			return op;
 		}
-	}
+	},
+	invert: {
+		name: "Invert",
+		
+		activeFields: {
+			vector: false,
+			relative: false,
+			absolute: false,
+			angle: false
+		},
+		
+		getOp: function(fields) {
+			
+			var op = {};
+			
+			op.applyTo = function(brushSpec) {
+				var cl = _.cloneDeep(brushSpec);
+				
+				cl.position[0] = -cl.position[0];
+				cl.position[1] = -cl.position[1];
+				cl.position[2] = -cl.position[2];
+				
+				cl.height = -cl.height;
+				
+				if(cl.op === "BO_Add") {
+					cl.op = "BO_Subtract";
+				}
+				else if(cl.op === "BO_Subtract") {
+					cl.op = "BO_Add";
+				}
+				
+				return cl;
+			};
+			
+			// This function is used to create a representative JS object
+			op.getWritable = function() {
+				var obj = {};
+				obj.name = "invert";
+				obj.fields = {};
+			};
+			
+			return op;
+		}
+	}/*,
+	t_translate: {
+		name: "[T] Translate",
+		
+		activeFields: {
+			vector: true,
+			relative: false,
+			absolute: false,
+			angle: false
+		},
+		
+		getOp: function(fields) {
+			
+			var op = {};
+			
+			op.vector = fields.vector;
+			
+			op.applyTo = function(brushSpec) {
+				var cl = _.cloneDeep(brushSpec);
+				
+				cl.transform[3] += op.vector[0];
+				cl.transform[7] += op.vector[1];
+				cl.transform[11] += op.vector[2];
+				
+				return cl;
+			};
+			
+			// This function is used to create a representative JS object
+			op.getWritable = function() {
+				var obj = {};
+				obj.name = "t_translate";
+				obj.fields = {};
+			};
+			
+			return op;
+		}
+	}*/
 }
 
 // List of objects used to populate a Select box
@@ -306,7 +386,9 @@ model.dEdit.brushOpsArray = [	dEdit.brushOps.centerReflect,
 								dEdit.brushOps.rotate,
 								dEdit.brushOps.planeReflect,
 								dEdit.brushOps.multiplyScale,
-								dEdit.brushOps.addElevation ];
+								dEdit.brushOps.addElevation,
+								dEdit.brushOps.invert/*,
+								dEdit.brushOps.t_translate*/ ];
 
 // If you want to define a new brush op, just add an object with the right structure to this array
 

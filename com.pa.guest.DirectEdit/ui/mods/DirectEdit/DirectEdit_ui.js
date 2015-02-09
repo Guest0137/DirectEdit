@@ -13,6 +13,8 @@ model.dEdit.brushDetail.active = ko.observable(false);
 
 // Brush selection logic
 model.dEdit.brushDetail.viewBrush = function(brushWrapper) {
+	model.dEdit.brushDetail.currentBrush().isSelected(false);
+	brushWrapper.isSelected(true);
 	model.dEdit.brushDetail.currentBrush(brushWrapper);
 	model.dEdit.brushDetail.active(true);
 };
@@ -44,7 +46,7 @@ model.dEdit.brushDetail.shiftCurrentDown = function() {
 
 // Simple clone logic
 model.dEdit.brushDetail.cloneCurrent = function() {
-	var cl = model.dEdit.brushDetail.currentBrush().getWritable().brushes[0];
+	var cl = model.dEdit.brushDetail.currentBrush().getWritable();
 	var wr = new dEdit.BrushWrapper(cl);
 	
 	var idx = model.dEdit.brushDetail.find(model.dEdit.brushDetail.currentBrush());
@@ -83,6 +85,19 @@ model.dEdit.brushDetail.removeCurrent = function() {
 			// If list is empty, hide it
 			model.dEdit.brushDetail.hide();
 		}
+	}
+};
+
+// Display stuff
+model.dEdit.opChar = function(str) {
+	if(str === "BO_Add") {
+		return "+";
+	}
+	else if(str === "BO_Subtract") {
+		return "-";
+	}
+	else {
+		return "?";
 	}
 };
 
@@ -181,7 +196,7 @@ dEdit.getCurrentOp = function() {
 
 dEdit.applyOpToCurrent = function() {
 	try {
-		var output = dEdit.getCurrentOp().applyTo(model.dEdit.brushDetail.currentBrush().getWritable().brushes[0]);
+		var output = dEdit.getCurrentOp().applyTo(model.dEdit.brushDetail.currentBrush().getWritable());
 		var wr = new dEdit.BrushWrapper(output);
 		
 		var idx = model.dEdit.brushDetail.find(model.dEdit.brushDetail.currentBrush());
@@ -201,7 +216,7 @@ dEdit.applyOpToCurrent = function() {
 
 dEdit.applyOpToCurrentClone = function() {
 	try {
-		var output = dEdit.getCurrentOp().applyTo(model.dEdit.brushDetail.currentBrush().getWritable().brushes[0]);
+		var output = dEdit.getCurrentOp().applyTo(model.dEdit.brushDetail.currentBrush().getWritable());
 		var wr = new dEdit.BrushWrapper(output);
 		
 		var idx = model.dEdit.brushDetail.find(model.dEdit.brushDetail.currentBrush());
