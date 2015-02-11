@@ -133,9 +133,9 @@ $(function() {
 					</table>
 				</div>
 				<div id="dEdit_planetModeTab_csg" class="dEdit_planetTable">
-					<div class="dEdit_note" data-bind="visible: dEdit.currentSpec.noBrushes">No custom CSG (default terrain generation)</div>
-					<table data-bind="foreach: dEdit.currentSpec.rootBrushGroup.members">
-						<tr class="dEdit_brushRow" data-bind="click: $root.dEdit.brushDetail.viewBrush, css: { dEdit_brushRowSelected: isSelected() }">
+					<div class="dEdit_note" data-bind="visible: dEdit.currentSpec.brushList.isEmpty">No custom CSG (default terrain generation)</div>
+					<table data-bind="foreach: dEdit.currentSpec.brushList.members">
+						<tr class="dEdit_brushRow" data-bind="click: $root.dEdit.brushDetail.brushClickEvent, css: { dEdit_brushRowSelected: isSelected() }">
 							<td class="dEdit_specCell" data-bind="text: /([^/.]+)(?=\.)/.exec(spec())[0]"></td>
 							<td class="dEdit_charCell"><div class="dEdit_charPlusMinus" data-bind="text: $root.dEdit.opChar(op())"></div></td>
 							<td class="dEdit_charCell" data-bind="text: !!mirrored() ? '%' : ' '"></td>

@@ -44,13 +44,13 @@ var dEdit = {
 		setOrDefault(c.planet.landingZoneSize,		c.original.planet.landingZoneSize,		100);
 		
 		if(typeof c.original.planetCSG !== "undefined") {
-			dEdit.readBrushes(c.original.planetCSG);
+			model.dEdit.currentSpec.brushList.readBrushes(c.original.planetCSG);
 		}
 		else if((typeof c.original.source !== "undefined") && (typeof c.original.source.brushes !== "undefined")) {
-			dEdit.readBrushes(c.original.source.brushes);
+			model.dEdit.currentSpec.brushList.readBrushes(c.original.source.brushes);
 		}
 		else {
-			dEdit.readBrushes([]);
+			model.dEdit.currentSpec.brushList.readBrushes([]);
 		}
 	},
 	
@@ -92,7 +92,7 @@ var dEdit = {
 			spec.source = {};
 		}
 		
-		var br = c.rootBrushGroup.getWritable();
+		var br = c.brushList.getWritable();
 		
 		spec.source.brushes = br;
 		spec.planetCSG = br;
@@ -109,38 +109,72 @@ var dEdit = {
     // Write the stored planet copy to the system
     // Also delete any planet that's already in the same location
     writePlanet: function (overwrite) {
+		var planetToWrite = dEdit.writableCurrentSpec();
+		
 		// Default behavior is to overwrite
+		// TODO:SETTING
         if(typeof overwrite === "undefined") {
             overwrite = true;
         }
 		
+		
 		if(overwrite) {
-			// TODO better overwrite logic
-			var sys_x = model.dEdit.currentSpec.position_x();
-			var sys_y = model.dEdit.currentSpec.position_y();
 			
-			if(typeof model.system().planets !== "undefined") {
-				var l = model.system().planets.length;
+			var tolerance = 0.5;
+			
+			/*  In previous versions I would use model.removePlanet wherever I found a conflict.
+				However, model.removePlanet sometimes just does nothing. Not sure why.
+				This new method clears the entire system and writes all planets that don't conflict.
+				
+				Pros:	Guaranteed to erase planets in the write location
+						Maintains order of planets in system
+						
+				Cons:	Unbuilds all planets
+						Probably has hidden bugs that will corrupt data
+						
+				We'll see how it goes.
+			*/
+			
+			var hasWritten = false;
+			
+			var planetsInitial = _.clone(model.system().planets);
+			
+			var numInitial = planetsInitial.length;
+			var numDiscards = 0;
 			
 			
-				for(var i = 0; i < l; i++) {
-					if((model.system().planets[i].position_x === sys_x)&&(model.system().planets[i].position_y === sys_y)) {
-						model.removePlanet(i);
-						break;
+			model.removeAllPlanets();
+			
+			for(var i = 0; i < numInitial; i ++) {
+				var xDiff = Math.abs(planetsInitial[i].position_x - planetToWrite.position_x);
+				var yDiff = Math.abs(planetsInitial[i].position_y - planetToWrite.position_y);
+				if((xDiff < tolerance) && (yDiff < tolerance)) {
+					numDiscards++;
+					if(!hasWritten) {
+						hasWritten = true;
+						api.systemEditor.addPlanet(planetToWrite);
 					}
 				}
+				else {
+					api.systemEditor.addPlanet(planetsInitial[i]);
+				}
 			}
-			console.log("Should be overwriting");
+			if(!hasWritten) {
+				hasWritten = true;
+				api.systemEditor.addPlanet(planetToWrite);
+			}
+			console.log("[DirectEdit] Overwrite: number of planets is " + numInitial + " - " + numDiscards + " + " + (hasWritten ? 1 : 0));
 		}
-		
-        api.systemEditor.addPlanet(dEdit.writableCurrentSpec());
+		else {
+			api.systemEditor.addPlanet(planetToWrite);
+		}
     }
 	
 };
 
 // Initialize model observables
 model.dEdit = {
-	version: "0.2.1 (Work in Progress)",
+	version: "0.3.0 (Work in Progress)",
 	currentSpec: {
 
 		name: ko.observable(),
@@ -169,10 +203,19 @@ model.dEdit = {
 			landingZoneSize: ko.observable(),
 		}
 		
-		// rootBrushGroup is initialized in another file
+		// brushList is initialized in another file
 	}
 };
 
 model.dEdit.selectedPlanet = ko.observable({});
 
-console.log("DirectEdit core loaded");
+// Add list of planets
+model.dEdit.listPlanets = ko.computed (function() {
+		var planetsList = Array({});
+		var planets = model.system().planets.slice();
+		planetsList = planetsList.concat(planets);
+		return planetsList;
+	}
+);
+
+console.log("[DirectEdit] Planet handling loaded");

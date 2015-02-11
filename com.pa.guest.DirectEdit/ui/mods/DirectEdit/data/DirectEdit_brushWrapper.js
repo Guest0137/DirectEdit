@@ -1,23 +1,5 @@
-model.dEdit.currentSpec.rootBrushGroup = {};
-model.dEdit.currentSpec.rootBrushGroup.members = ko.observableArray();
-model.dEdit.currentSpec.rootBrushGroup.getWritable = function() {
 
-	var writableBrushes = [];
-	
-	// Get current observableArray state
-	var image = model.dEdit.currentSpec.rootBrushGroup.members();
-	
-	for (i = 0; i < image.length; i++) {
-		
-		writableBrushes = writableBrushes.concat(image[i].getWritable());
-	}
-	
-	return writableBrushes;
-};
-
-model.dEdit.currentSpec.noBrushes = ko.computed( function() {
-	return model.dEdit.currentSpec.rootBrushGroup.members().length === 0;
-});
+/* ==================== Brush wrapper "class" ==================== */
 
 dEdit.BrushWrapper = function(brush) {
 	var self = this;
@@ -98,18 +80,4 @@ dEdit.BrushWrapper = function(brush) {
 	};
 };
 
-dEdit.readBrushes = function(brushArray) {
-	// Clear existing data
-	model.dEdit.currentSpec.rootBrushGroup.members([]);
-	
-	var temp = new Array(brushArray.length);
-	
-	// Link brushes
-	for(var i = 0; i < brushArray.length; i++) {
-		temp[i] = new dEdit.BrushWrapper(brushArray[i]);
-	}
-	
-	model.dEdit.currentSpec.rootBrushGroup.members(temp);
-};
-
-console.log("DirectEdit brush handling loaded");
+console.log("[DirectEdit] Brush wrapper class loaded");

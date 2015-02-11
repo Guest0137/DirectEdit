@@ -4,9 +4,9 @@
     "display_name": "DirectEdit",
     "description": "A precise and unrestricted interface for system editing.",
     "author": "Guest",
-    "version": "0.2.1 [WIP]",
+    "version": "0.3.0 [WIP]",
     "build": "77725",
-    "date": "2015/09/03",
+    "date": "2015/10/03",
     "signature": "not yet implemented",
     "forum": "https://forums.uberent.com/threads/wip-directedit.67763/",
     "category": [
@@ -16,12 +16,21 @@
     "scenes": {
         "system_editor": [
             "coui://ui/mods/DirectEdit/DirectEdit_core.js",
-            "coui://ui/mods/DirectEdit/DirectEdit.css",
-            "coui://ui/mods/DirectEdit/DirectEdit_panel_main.html",
-            "coui://ui/mods/DirectEdit/DirectEdit_panel_brushDetail.html",
-            "coui://ui/mods/DirectEdit/DirectEdit_brushes.js",
-            "coui://ui/mods/DirectEdit/DirectEdit_sym.js",
-            "coui://ui/mods/DirectEdit/DirectEdit_ui.js"
+            "coui://ui/mods/DirectEdit/DirectEdit_math.js",
+			
+            "coui://ui/mods/DirectEdit/data/DirectEdit_brushFunctions.js",
+            "coui://ui/mods/DirectEdit/data/DirectEdit_brushWrapper.js",
+            "coui://ui/mods/DirectEdit/data/DirectEdit_brushList.js",
+			
+            "coui://ui/mods/DirectEdit/ui/DirectEdit_coreUI.js",
+            "coui://ui/mods/DirectEdit/ui/DirectEdit_brushSelection.js",
+            "coui://ui/mods/DirectEdit/ui/DirectEdit_brushEditing.js",
+			
+            "coui://ui/mods/DirectEdit/ui/DirectEdit.css",
+            "coui://ui/mods/DirectEdit/ui/DirectEdit_panel_main.html",
+            "coui://ui/mods/DirectEdit/ui/DirectEdit_panel_brushDetail.html",
+			
+            "coui://ui/mods/DirectEdit/DirectEdit_start.js"
         ]
     },
     "id": "DirectEdit",
