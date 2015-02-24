@@ -1,0 +1,64 @@
+"Tools" in DirectEdit are a kind of function with customizable parameters that
+can be applied to native PA data structures (e.g. brushes, planet specs,
+landing zones, metal spots).
+
+To add a tool to DirectEdit, you first need to identify which kind of object
+you'll be modifying and what parameters you want to use. With this information,
+construct an object in the correct format and make an API call to add it to
+the tool list of your choice.
+
+You can find examples of each kind of tool under /DirectEdit/stock_tools.
+You can also reference this example code, which adds a planet tool:
+
+dEdit.api.registerPlanetTool(
+	{
+		// The name of this tool in the select box
+		label: "Example",
+		
+		// The author name to display when selected
+		author: "Guest",
+		
+		// The description to display when selected
+		description: "Does something?",
+		
+		// A warning to display in red text when selected
+		warning: "Does nothing!",
+		
+		// Fields required by this function; each of these will generate an input box
+		// The string associated with each field will be displayed as its label
+		// For convenience, all currently valid fields are given below
+		// This system is subject to change in future versions
+		activeFields: {
+			num_angle:		"Angle (deg)",
+			num_add:		"Coffee strength",
+			num_mult:		"Coffee quantity",
+			num_mean:		"Average sweetness",
+			num_sd:			"SD of sweetness",
+			num_min:		"Min creams",
+			num_max:		"Max creams",
+			vec_direction:	"Beans RGB",
+			vec_scaling:	"Cream container dim",
+			vec_translate:	"Particle velocity"
+		},
+		
+		// This creates an instance of the tool's function with the currently set fields
+		getFunction: function(fields) {
+			var fn = {};
+			
+			fn.apoapsis = num_add;
+			
+			// This is the actual tool function that returns a modified version of input data
+			fn.applyTo = function(planetSpec) {
+				// Generally a good idea to clone first
+				var cl = _.cloneDeep(planetSpec);
+				
+				cl.position_x = Math.round(fn.apoapsis);
+				cl.position_y = 0;
+				
+				return cl;
+			};
+			
+			return fn;
+		}
+	}
+);

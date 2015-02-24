@@ -1,29 +1,33 @@
-#dEdit_base {
+#dEdit_primary {
 	background: rgba(15,15,15,1);
 	border: 1px solid rgba(255,255,255,1);
 	padding: 10px 10px 10px 10px;
 	height: 100%;
 	width: 100%;
 }
-#dEdit_base table{
+#dEdit_primary table{
 	width: 100%;
 }
-#dEdit_base select {
+#dEdit_primary select {
 	width: 100%;
 }
 
-#dEdit_brushDetail_wrapper {
+#dEdit_secondary_wrapper {
 	background: rgba(15,15,23,1);
 	border: 1px solid rgba(255,255,255,1);
 	padding: 10px 10px 10px 10px;
 	height: 100%;
 	width: 100%;
 }
-#dEdit_brushDetail table{
+#dEdit_secondary table{
 	width: 100%;
 }
-#dEdit_brushDetail select {
+#dEdit_secondary select {
 	width: 100%;
+}
+
+#dEdit_planetSelect select {
+	width: 240px;
 }
 
 .dEdit_xyz {
@@ -31,11 +35,11 @@
 	float: right;
 }
 
-.dEdit_brushRow:hover{
+.dEdit_listRow:hover{
     background: rgba(191,191,255,1);
 }
 
-.dEdit_brushRowSelected {
+.dEdit_listRowSelected {
 	background: rgba(128,176,208,1);
 }
 

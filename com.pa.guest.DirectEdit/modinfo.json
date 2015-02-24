@@ -4,9 +4,9 @@
     "display_name": "DirectEdit",
     "description": "A precise and unrestricted interface for system editing.",
     "author": "Guest",
-    "version": "0.3.0 [WIP]",
-    "build": "77725",
-    "date": "2015/10/03",
+    "version": "0.4.0 [WIP]",
+    "build": "78071",
+    "date": "2015/02/24",
     "signature": "not yet implemented",
     "forum": "https://forums.uberent.com/threads/wip-directedit.67763/",
     "category": [
@@ -15,22 +15,46 @@
     ],
     "scenes": {
         "system_editor": [
-            "coui://ui/mods/DirectEdit/DirectEdit_core.js",
-            "coui://ui/mods/DirectEdit/DirectEdit_math.js",
+            "coui://ui/mods/DirectEdit/init.js",
+            "coui://ui/mods/DirectEdit/math.js",
 			
-            "coui://ui/mods/DirectEdit/data/DirectEdit_brushFunctions.js",
-            "coui://ui/mods/DirectEdit/data/DirectEdit_brushWrapper.js",
-            "coui://ui/mods/DirectEdit/data/DirectEdit_brushList.js",
+            "coui://ui/mods/DirectEdit/classes/BrushWrapper.js",
+            "coui://ui/mods/DirectEdit/classes/MetalWrapper.js",
+            "coui://ui/mods/DirectEdit/classes/SpawnWrapper.js",
+            "coui://ui/mods/DirectEdit/classes/WrapperList.js",
+            "coui://ui/mods/DirectEdit/classes/SelectionManager.js",
+            "coui://ui/mods/DirectEdit/classes/ToolManager.js",
 			
-            "coui://ui/mods/DirectEdit/ui/DirectEdit_coreUI.js",
-            "coui://ui/mods/DirectEdit/ui/DirectEdit_brushSelection.js",
-            "coui://ui/mods/DirectEdit/ui/DirectEdit_brushEditing.js",
+            "coui://ui/mods/DirectEdit/planet.js",
 			
-            "coui://ui/mods/DirectEdit/ui/DirectEdit.css",
-            "coui://ui/mods/DirectEdit/ui/DirectEdit_panel_main.html",
-            "coui://ui/mods/DirectEdit/ui/DirectEdit_panel_brushDetail.html",
+            "coui://ui/mods/DirectEdit/prepUI.js",
+            "coui://ui/mods/DirectEdit/api.js",
 			
-            "coui://ui/mods/DirectEdit/DirectEdit_start.js"
+            "coui://ui/mods/DirectEdit/DirectEdit.css",
+            "coui://ui/mods/DirectEdit/panel_main.html",
+            "coui://ui/mods/DirectEdit/panel_secondary.html",
+			
+            "coui://ui/mods/DirectEdit/startUI.js",
+			
+			
+			
+            "coui://ui/mods/DirectEdit/stock_tools/brush/centerReflect.js",
+            "coui://ui/mods/DirectEdit/stock_tools/brush/rotate.js",
+            "coui://ui/mods/DirectEdit/stock_tools/brush/planeReflect.js",
+            "coui://ui/mods/DirectEdit/stock_tools/brush/addElevation.js",
+            "coui://ui/mods/DirectEdit/stock_tools/brush/multiplyScale.js",
+            "coui://ui/mods/DirectEdit/stock_tools/brush/invert.js",
+            "coui://ui/mods/DirectEdit/stock_tools/brush/randomizePsi.js",
+			
+            "coui://ui/mods/DirectEdit/stock_tools/metal/centerReflect.js",
+            "coui://ui/mods/DirectEdit/stock_tools/metal/rotate.js",
+            "coui://ui/mods/DirectEdit/stock_tools/metal/planeReflect.js",
+			
+            "coui://ui/mods/DirectEdit/stock_tools/spawn/centerReflect.js",
+            "coui://ui/mods/DirectEdit/stock_tools/spawn/rotate.js",
+            "coui://ui/mods/DirectEdit/stock_tools/spawn/planeReflect.js",
+			
+            "coui://ui/mods/DirectEdit/stock_tools/planet/resize.js"
         ]
     },
     "id": "DirectEdit",

@@ -1,5 +1,5 @@
 
-/* ==================== Brush wrapper "class" ==================== */
+/* ==================== Brush wrapper class ==================== */
 
 dEdit.BrushWrapper = function(brush) {
 	var self = this;
@@ -80,4 +80,4 @@ dEdit.BrushWrapper = function(brush) {
 	};
 };
 
-console.log("[DirectEdit] Brush wrapper class loaded");
+console.log("[DirectEdit] Added class: BrushWrapper");
