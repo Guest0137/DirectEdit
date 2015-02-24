@@ -13,7 +13,7 @@ dEdit.api.registerMetalTool(
 			var fn = {};
 			
 			fn.axis = fields.vec_direction;
-			fn.angle = fields.num_angle; // This should be passed in as radians
+			fn.angle = dEdit.degToRad(fields.num_angle); // This should be passed in as degrees
 			
 			// Make rotation matrix
 			
