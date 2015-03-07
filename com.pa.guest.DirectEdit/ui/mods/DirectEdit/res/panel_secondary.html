@@ -1,0 +1,10 @@
+<script>
+$(function() {
+	loadHtmlTemplate($("#dEdit_brushDetail"),"coui://ui/mods/DirectEdit/res/brushDetail.html");
+	loadHtmlTemplate($("#dEdit_metalDetail"),"coui://ui/mods/DirectEdit/res/metalDetail.html");
+	loadHtmlTemplate($("#dEdit_spawnDetail"),"coui://ui/mods/DirectEdit/res/spawnDetail.html");
+});
+</script>
+<div id="dEdit_brushDetail" data-bind="visible:  dEdit.display.primary.planetDetailTabs.tabs()[1].isSelected"></div>
+<div id="dEdit_metalDetail" data-bind="visible:  dEdit.display.primary.planetDetailTabs.tabs()[2].isSelected"></div>
+<div id="dEdit_spawnDetail" data-bind="visible:  dEdit.display.primary.planetDetailTabs.tabs()[3].isSelected"></div>

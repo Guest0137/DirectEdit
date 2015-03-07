@@ -1,0 +1,146 @@
+<div>
+	<table class="dEdit_tabSelect">
+		<tr>
+			<!-- ko foreach: dEdit.display.secondary.spawnDetailTabs.tabs -->
+			<td class="dEdit_tab" data-bind="text: label, css: {dEdit_selectedTab: isSelected()}, click: $root.dEdit.display.secondary.spawnDetailTabs.selectTab"></td>
+			<!-- /ko -->
+			<td class="dEdit_hide" data-bind="click: dEdit.display.secondary.hide">X</td>
+		</tr>
+	</table>
+	<div class="dEdit_tabContent dEdit_spawnBox dEdit_itemDetail">
+		<div data-bind="visible: dEdit.display.secondary.spawnDetailTabs.tabs()[0].isSelected">
+			<div class="dEdit_itemProperties">
+				<table data-bind="visible: dEdit.currentSpec.spawnList.selectionManager.items().length === 1">
+					<tr>
+						<td>Location<span class="dEdit_xyz">(x)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.spawnList.selectionManager.current().location[0]"></input></td>
+					</tr>
+					<tr>
+						<td><span class="dEdit_xyz">(y)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.spawnList.selectionManager.current().location[1]"></input></td>
+					</tr>
+					<tr>
+						<td><span class="dEdit_xyz">(z)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.spawnList.selectionManager.current().location[2]"></input></td>
+					</tr>
+					<tr>
+						<td>Min</td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.spawnList.selectionManager.current().min"></input></td>
+					</tr>
+					<tr>
+						<td>Max</td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.spawnList.selectionManager.current().max"></input></td>
+					</tr>
+				</table>
+				<div class="dEdit_note" data-bind="visible: dEdit.currentSpec.spawnList.selectionManager.items().length > 1">
+					<span data-bind="text: dEdit.currentSpec.spawnList.selectionManager.items().length"></span> landing zones selected. Changes will be applied to all selected landing zones.
+				</div>
+			</div>
+			<div class="dEdit_buttonTable">
+				<table>
+					<tr>
+						<td style="text-align:right"><button data-bind="click: dEdit.currentSpec.spawnList.selectionManager.cloneAll">Clone</button></td>
+						<td style="text-align:left"><button data-bind="click: dEdit.currentSpec.spawnList.selectionManager.removeAll">Delete</button></td>
+					</tr>
+					<tr>
+						<td style="text-align:right"><button data-bind="click: dEdit.currentSpec.spawnList.selectionManager.shiftUpAll">Shift up</button></td>
+						<td style="text-align:left"><button data-bind="click: dEdit.currentSpec.spawnList.selectionManager.shiftDownAll">Shift down</button></td>
+					</tr>
+					<tr>
+						<td style="text-align:right"><button data-bind="click: dEdit.currentSpec.spawnList.selectionManager.joinUp, enable: dEdit.currentSpec.spawnList.selectionManager.items().length > 1">Join up</button></td>
+						<td style="text-align:left"><button data-bind="click: dEdit.currentSpec.spawnList.selectionManager.joinDown, enable: dEdit.currentSpec.spawnList.selectionManager.items().length > 1">Join down</button></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div data-bind="visible: dEdit.display.secondary.spawnDetailTabs.tabs()[1].isSelected">
+			<div class="dEdit_itemTools">
+				<select style="width:100%" data-bind="options: dEdit.spawnTools.tools, optionsText: function(item) { return item.label; }, value: dEdit.spawnTools.selectedType"></select>
+				<div class="dEdit_note" data-bind="text: dEdit.spawnTools.selectedType().author"></div>
+				<div class="dEdit_note" data-bind="text: dEdit.spawnTools.selectedType().description"></div>
+				<div class="dEdit_warn" data-bind="text: dEdit.spawnTools.selectedType().warning"></div>
+					<!-- TODO: avoid hard-coded fields-->
+				<table>
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.num_angle">
+						<td><span data-bind="text: dEdit.spawnTools.selectedType().activeFields.num_angle"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_angle"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.num_add">
+						<td><span data-bind="text: dEdit.spawnTools.selectedType().activeFields.num_add"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_add"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.num_mult">
+						<td><span data-bind="text: dEdit.spawnTools.selectedType().activeFields.num_add"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_add"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.num_mean">
+						<td><span data-bind="text: dEdit.spawnTools.selectedType().activeFields.num_mean"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_mean"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.num_sd">
+						<td><span data-bind="text: dEdit.spawnTools.selectedType().activeFields.num_sd"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_sd"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.num_min">
+						<td><span data-bind="text: dEdit.spawnTools.selectedType().activeFields.num_min"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_min"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.num_max">
+						<td><span data-bind="text: dEdit.spawnTools.selectedType().activeFields.num_max"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_max"></input></td>
+					</tr>
+					
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.vec_direction">
+						<td><span data-bind="text: dEdit.spawnTools.selectedType().activeFields.vec_direction"></span><span class="dEdit_xyz">(x)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_direction[0]"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.vec_direction">
+						<td><span class="dEdit_xyz">(y)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_direction[1]"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.vec_direction">
+						<td><span class="dEdit_xyz">(z)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_direction[2]"></input></td>
+					</tr>
+					
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.vec_scaling">
+						<td><span data-bind="text: dEdit.spawnTools.selectedType().activeFields.vec_scaling"></span><span class="dEdit_xyz">(x)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_scaling[0]"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.vec_scaling">
+						<td><span class="dEdit_xyz">(y)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_scaling[1]"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.vec_scaling">
+						<td><span class="dEdit_xyz">(z)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_scaling[2]"></input></td>
+					</tr>
+					
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.vec_translate">
+						<td><span data-bind="text: dEdit.spawnTools.selectedType().activeFields.vec_translate"></span><span class="dEdit_xyz">(x)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_translate[0]"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.vec_translate">
+						<td><span class="dEdit_xyz">(y)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_translate[1]"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.spawnTools.selectedType().activeFields.vec_translate">
+						<td><span class="dEdit_xyz">(z)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_translate[2]"></input></td>
+					</tr>
+				</table>
+				<div class="dEdit_note" data-bind="visible: dEdit.currentSpec.spawnList.selectionManager.items().length > 1">
+					<span data-bind="text: dEdit.currentSpec.spawnList.selectionManager.items().length"></span> landing zones selected. Tools will be applied to all selected landing zones.
+				</div>
+			</div>
+			<div class="dEdit_buttonTable">
+				<table>
+					<tr>
+						<td><button style="width: 100%" data-bind="click: function(){dEdit.currentSpec.metalList.selectionManager.applyToolToAll(model.dEdit.metalTools.getApplicable());}, enable: dEdit.metalTools.isReady">Apply</button></td>
+						<td><button style="width: 100%" data-bind="click: function(){dEdit.currentSpec.metalList.selectionManager.cloneToolToAll(model.dEdit.metalTools.getApplicable());}, enable: dEdit.metalTools.isReady">Clone & Apply</button></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -21,7 +21,7 @@ dEdit.api.registerMetalTool(
 				return cl;
 			};
 			
-			return op;
+			return fn;
 		}
 	}
 );

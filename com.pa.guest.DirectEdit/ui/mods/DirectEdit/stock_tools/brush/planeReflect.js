@@ -28,7 +28,7 @@ dEdit.api.registerBrushTool(
 				return cl;
 			};
 			
-			return op;
+			return fn;
 		}
 	}
 );

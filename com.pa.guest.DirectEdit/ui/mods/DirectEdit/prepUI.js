@@ -19,6 +19,10 @@ model.dEdit.listPlanets = ko.computed (function() {
 	}
 );
 
+model.dEdit.canRead = ko.computed(function() {
+	return(!$.isEmptyObject(model.dEdit.selectedPlanet()));
+});
+
 
 
 /* ==================== Persistent / static / global-esque variables ==================== */
@@ -134,8 +138,14 @@ model.dEdit.applyPlanetTool = function() {
 /* ==================== Variables dictating visibility of UI sections ==================== */
 
 model.dEdit.display = new function() {
-
-	this.secondary = new function() {
+	var self = this;
+	
+	self.primary = new function() {
+		var primary = this;
+		primary.planetDetailTabs = new dEdit.TabController(["Planet","CSG","Metal","Spawns","Tools"]);
+	}
+	
+	self.secondary = new function() {
 		var secondary = this;
 		
 		secondary.mode = ko.observable("");
@@ -144,55 +154,40 @@ model.dEdit.display = new function() {
 		secondary.show = function() {secondary.active(true);};
 		secondary.hide = function() {secondary.active(false);};
 		
-		secondary.brushDetail = new function() {
-			this.active = ko.computed(function() {
-				return secondary.mode()==="brush";
-			});
-		};
-		
-		secondary.metalDetail = new function() {
-			this.active = ko.computed(function() {
-				return secondary.mode()==="metal";
-			});
-		};
-		
-		secondary.spawnDetail = new function() {
-			this.active = ko.computed(function() {
-				return secondary.mode()==="spawn";
-			});
-		};
-		
-		// Autohide secondary panel when nothing is selected
-		// You can still use the "hide" button do force the panel to vanish, since the 
-		// autohide is only updated when changes are made to an observableArray
-		model.dEdit.currentSpec.brushList.selectionManager.items.subscribe(function(array) {
-			secondary.mode("brush");
-			if(array.length>0) {
-				secondary.show();
-			}
-			else {
-				secondary.hide();
-			}
-		});
-		model.dEdit.currentSpec.metalList.selectionManager.items.subscribe(function(array) {
-			secondary.mode("metal");
-			if(array.length>0) {
-				secondary.show();
-			}
-			else {
-				secondary.hide();
-			}
-		});
-		model.dEdit.currentSpec.spawnList.selectionManager.items.subscribe(function(array) {
-			secondary.mode("spawn");
-			if(array.length>0) {
-				secondary.show();
-			}
-			else {
-				secondary.hide();
-			}
-		});
+		secondary.brushDetailTabs = new dEdit.TabController(["Properties","Tools"]);
+		secondary.metalDetailTabs = new dEdit.TabController(["Properties","Tools"]);
+		secondary.spawnDetailTabs = new dEdit.TabController(["Properties","Tools"]);
 	};
+	
+	// Auto-hide logic
+	var emptySelectionAutohide = function(array) {
+		if(array.length === 0) {
+			self.secondary.hide();
+		}
+		else {
+			self.secondary.show();
+		}
+	}
+	
+	model.dEdit.currentSpec.brushList.selectionManager.items.subscribe(emptySelectionAutohide);
+	model.dEdit.currentSpec.metalList.selectionManager.items.subscribe(emptySelectionAutohide);
+	model.dEdit.currentSpec.spawnList.selectionManager.items.subscribe(emptySelectionAutohide);
+	
+	self.primary.planetDetailTabs.selectedTab.subscribe(function(tab) {
+		if(tab.label==="CSG") {
+			emptySelectionAutohide(model.dEdit.currentSpec.brushList.selectionManager.items());
+		}
+		else if(tab.label==="Metal") {
+			emptySelectionAutohide(model.dEdit.currentSpec.metalList.selectionManager.items());
+		}
+		else if(tab.label==="Spawns") {
+			emptySelectionAutohide(model.dEdit.currentSpec.spawnList.selectionManager.items());
+		}
+		else {
+			self.secondary.hide();
+		}
+	});
+	
 };
 
 /* ==================== Planet read/write ==================== */

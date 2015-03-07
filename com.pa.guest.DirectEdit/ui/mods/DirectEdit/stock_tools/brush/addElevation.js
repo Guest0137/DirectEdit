@@ -10,7 +10,7 @@ dEdit.api.registerBrushTool(
 		getFunction: function(fields) {
 			var fn = {};
 			
-			fn.delta = fields.num_sum;
+			fn.delta = fields.num_add;
 			
 			fn.applyTo = function(brushSpec) {
 				var cl = _.cloneDeep(brushSpec);

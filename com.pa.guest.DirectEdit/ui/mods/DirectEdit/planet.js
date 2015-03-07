@@ -1,4 +1,5 @@
 model.dEdit.hasPlanet = ko.observable(false);
+
 model.dEdit.currentSpec = new function() {
 	var self = this;
 	

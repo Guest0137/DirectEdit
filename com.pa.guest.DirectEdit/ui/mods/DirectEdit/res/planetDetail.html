@@ -1,0 +1,237 @@
+<div class="dEdit_welcome" data-bind="visible: !dEdit.hasPlanet()">
+	<div>
+		Welcome to DirectEdit! 
+	</div>
+	<div>
+		<b>Read</b> a planet from the system to begin editing, then <b>Write</b> the planet when you've finished making changes.
+	</div>
+	<div>
+		You can use the shift and ctrl keys to select multiple list elements.
+	</div>
+	<div>
+		Please report any bugs or unexpected behavior to the <a data-bind="click: function(){engine.call('web.launchPage','https://forums.uberent.com/threads/wip-directedit-0-4-0.67763/');}">forum thread</a>.
+	</div>
+</div>
+<div data-bind="visible: dEdit.hasPlanet" id="dEdit_planetModeTabs">
+	<table class="dEdit_tabSelect">
+		<tr data-bind="foreach: dEdit.display.primary.planetDetailTabs.tabs">
+			<td class="dEdit_tab" data-bind="text: label, css: {dEdit_selectedTab: isSelected()}, click: $root.dEdit.display.primary.planetDetailTabs.selectTab">
+			</td>
+		</tr>
+	</table>
+	<div class="dEdit_tabContent">
+		<div data-bind="visible: dEdit.display.primary.planetDetailTabs.tabs()[0].isSelected" class="dEdit_defaultBox dEdit_planetTable">
+			<table>
+				<tr>
+					<td>Name</td>
+					<td class="dEdit_inputCell"><input type="text" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.name"></input></td>
+				</tr>
+				<tr>
+					<td>Mass</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.mass"></input></td>
+				</tr>
+				<tr>
+					<td>Position<span class="dEdit_xyz">(x)</span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.position_x"></input></td>
+				</tr>
+				<tr>
+					<td><span class="dEdit_xyz">(y)</span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.position_y"></input></td>
+				</tr>
+				<tr>
+					<td>Velocity<span class="dEdit_xyz">(x)</span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.velocity_x"></input></td>
+				</tr>
+				<tr>
+					<td><span class="dEdit_xyz">(y)</span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.velocity_y"></input></td>
+				</tr>
+				<tr>
+					<td>Engines to Launch</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.required_thrust_to_move"></input></td>
+				</tr>
+				<tr>
+					<td>Seed</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.seed"></input></td>
+				</tr>
+				<tr>
+					<td>Radius</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.radius"></input></td>
+				</tr>
+				<tr>
+					<td>Biome</td>
+					<td class="dEdit_inputCell"><select data-bind="options: biomes, value: dEdit.currentSpec.planet.biome"></select></td>
+				</tr>
+				<tr>
+					<td>Height Range</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.heightRange"></input></td>
+				</tr>
+				<tr>
+					<td>Water Coverage</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.waterHeight"></input></td>
+				</tr>
+				<tr>
+					<td>Water Depth</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.waterDepth"></input></td>
+				</tr>
+				<tr>
+					<td>Temperature</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.temperature"></input></td>
+				</tr>
+				<tr>
+					<td>Metal Density</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.metalDensity"></input></td>
+				</tr>
+				<tr>
+					<td>Metal Clusters</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.metalClusters"></input></td>
+				</tr>
+				<tr>
+					<td>Starting planet</td>
+					<td class="dEdit_inputCell"><input type="checkbox" data-bind="checked: dEdit.currentSpec.starting_planet"></input></td>
+				</tr>
+				<tr>
+					<td>LZ Per Army</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.landingZonesPerArmy"></input></td>
+				</tr>
+				<tr>
+					<td>LZ Size</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.landingZoneSize"></input></td>
+				</tr>
+				<tr>
+					<td>Symmetry Type</td>
+					<td class="dEdit_inputCell"><select data-bind="options: symmetryTypes, value: dEdit.currentSpec.planet.symmetryType"></select></td>
+				</tr>
+				<tr data-bind="visible: dEdit.currentSpec.planet.symmetryType() === 'terrain and CSG'">
+					<td colspan="2" class="dEdit_warn">WARNING: paired brushes will be unlinked when writing planet</td>
+				</tr>
+				<tr>
+					<td>N/S Mirrored Metal</td>
+					<td class="dEdit_inputCell"><input type="checkbox" data-bind="checked: dEdit.currentSpec.planet.symmetricalMetal"></input></td>
+				</tr>
+				<tr>
+					<td>N/S Mirrored LZ</td>
+					<td class="dEdit_inputCell"><input type="checkbox" data-bind="checked: dEdit.currentSpec.planet.symmetricalStarts"></input></td>
+				</tr>
+			</table>
+		</div>
+		<div data-bind="visible: dEdit.display.primary.planetDetailTabs.tabs()[1].isSelected" class="dEdit_brushBox dEdit_planetTable">
+			<div class="dEdit_note" data-bind="visible: dEdit.currentSpec.brushList.isEmpty">No custom CSG (default terrain generation)</div>
+			<table data-bind="foreach: dEdit.currentSpec.brushList.items">
+				<tr class="dEdit_listRow" data-bind="click: $root.dEdit.currentSpec.brushList.selectionManager.handleClickEvent, css: { dEdit_listRowSelected: isSelected() }">
+					<td class="dEdit_specCell" data-bind="text: /([^/.]+)(?=\.)/.exec(spec())[0]"></td>
+					<td class="dEdit_charCell"><div class="dEdit_charPlusMinus" data-bind="text: $root.dEdit.opChar(op())"></div></td>
+					<td class="dEdit_charCell" data-bind="text: !!mirrored() ? '%' : ' '"></td>
+					<td class="dEdit_charCell" data-bind="text: !!pathable() ? 'P' : ' '"></td>
+					<td class="dEdit_charCell" data-bind="text: !!mergeable() ? 'M' : ' '"></td>
+					<td class="dEdit_charCell" data-bind="text: !!no_features() ? 'N' : ' '"></td>
+				</tr>
+			</table>
+		</div>
+		<div data-bind="visible: dEdit.display.primary.planetDetailTabs.tabs()[2].isSelected" class="dEdit_metalBox dEdit_planetTable">
+			<div class="dEdit_note" data-bind="visible: dEdit.currentSpec.metalList.isEmpty">No custom metal spots (random generation)</div>
+			<table data-bind="foreach: dEdit.currentSpec.metalList.items">
+				<tr class="dEdit_listRow" data-bind="click: $root.dEdit.currentSpec.metalList.selectionManager.handleClickEvent, css: { dEdit_listRowSelected: isSelected() }">
+					<td data-bind="text: location[0]().toFixed(3)"></td>
+					<td data-bind="text: location[1]().toFixed(3)"></td>
+					<td data-bind="text: location[2]().toFixed(3)"></td>
+				</tr>
+			</table>
+		</div>
+		<div data-bind="visible: dEdit.display.primary.planetDetailTabs.tabs()[3].isSelected" class="dEdit_spawnBox dEdit_planetTable">
+			<div class="dEdit_note" data-bind="visible: dEdit.currentSpec.spawnList.isEmpty">No custom landing zones (random generation)</div>
+			<table data-bind="foreach: dEdit.currentSpec.spawnList.items">
+				<tr class="dEdit_listRow" data-bind="click: $root.dEdit.currentSpec.spawnList.selectionManager.handleClickEvent, css: { dEdit_listRowSelected: isSelected() }">
+					<td data-bind="text: location[0]().toFixed(3)"></td>
+					<td data-bind="text: location[1]().toFixed(3)"></td>
+					<td data-bind="text: location[2]().toFixed(3)"></td>
+					<td data-bind="text: min"></td>
+					<td data-bind="text: max"></td>
+				</tr>
+			</table>
+		</div>
+		<div data-bind="visible: dEdit.display.primary.planetDetailTabs.tabs()[4].isSelected" class="dEdit_defaultBox dEdit_planetTable">
+			<select style="width:100%" data-bind="options: dEdit.planetTools.tools, optionsText: function(item) { return item.label; }, value: dEdit.planetTools.selectedType"></select>
+			<div class="dEdit_note" data-bind="text: dEdit.planetTools.selectedType().author"></div>
+			<div class="dEdit_note" data-bind="text: dEdit.planetTools.selectedType().description"></div>
+			<div class="dEdit_warn" data-bind="text: dEdit.planetTools.selectedType().warning"></div>
+			<!-- TODO: avoid hard-coded fields-->
+			<table>
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.num_angle">
+					<td><span data-bind="text: dEdit.planetTools.selectedType().activeFields.num_angle"></span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_angle"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.num_add">
+					<td><span data-bind="text: dEdit.planetTools.selectedType().activeFields.num_add"></span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_add"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.num_mult">
+					<td><span data-bind="text: dEdit.planetTools.selectedType().activeFields.num_add"></span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_add"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.num_mean">
+					<td><span data-bind="text: dEdit.planetTools.selectedType().activeFields.num_mean"></span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_mean"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.num_sd">
+					<td><span data-bind="text: dEdit.planetTools.selectedType().activeFields.num_sd"></span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_sd"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.num_min">
+					<td><span data-bind="text: dEdit.planetTools.selectedType().activeFields.num_min"></span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_min"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.num_max">
+					<td><span data-bind="text: dEdit.planetTools.selectedType().activeFields.num_max"></span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_max"></input></td>
+				</tr>
+				
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.vec_direction">
+					<td><span data-bind="text: dEdit.planetTools.selectedType().activeFields.vec_direction"></span><span class="dEdit_xyz">(x)</span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_direction[0]"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.vec_direction">
+					<td><span class="dEdit_xyz">(y)</span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_direction[1]"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.vec_direction">
+					<td><span class="dEdit_xyz">(z)</span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_direction[2]"></input></td>
+				</tr>
+				
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.vec_scaling">
+					<td><span data-bind="text: dEdit.planetTools.selectedType().activeFields.vec_scaling"></span><span class="dEdit_xyz">(x)</span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_scaling[0]"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.vec_scaling">
+					<td><span class="dEdit_xyz">(y)</span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_scaling[1]"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.vec_scaling">
+					<td><span class="dEdit_xyz">(z)</span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_scaling[2]"></input></td>
+				</tr>
+				
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.vec_translate">
+					<td><span data-bind="text: dEdit.planetTools.selectedType().activeFields.vec_translate"></span><span class="dEdit_xyz">(x)</span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_translate[0]"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.vec_translate">
+					<td><span class="dEdit_xyz">(y)</span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_translate[1]"></input></td>
+				</tr>
+				<tr data-bind="visible: dEdit.planetTools.selectedType().activeFields.vec_translate">
+					<td><span class="dEdit_xyz">(z)</span></td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_translate[2]"></input></td>
+				</tr>
+			</table>
+			<div class="dEdit_buttonTable">
+				<table>
+					<tr>
+						<td><button style="width: 100%" data-bind="click: function(){dEdit.applyPlanetTool;}, enable: dEdit.planetTools.isReady">Apply</button></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

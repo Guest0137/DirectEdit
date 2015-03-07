@@ -104,5 +104,9 @@ dEdit.vAdd = function(a,b) {
 		return c;
 	}
 };
+dEdit.normalize = function(v) {
+	var r = Math.sqrt(dEdit.innerProduct(v,v));
+	return dEdit.vMult(v,1/r);
+};
 
 console.log("[DirectEdit] Vector math loaded");

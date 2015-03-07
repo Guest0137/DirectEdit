@@ -13,16 +13,19 @@ function loadHtmlTemplate(element, url) {
 
 // Create frame
 (function() {
-	// Create main frame
-	createFloatingFrame("dEdit_primary", 320, 620, {"offset": "center"});
-	// Inject HTML into frame
-	loadHtmlTemplate($("#dEdit_primary_content"), "coui://ui/mods/DirectEdit/panel_main.html");
-	
-	// Create frame for editing individual brushes
+	// Create frames
+	createFloatingFrame("dEdit_primary", 320, 608, {"offset": "center"});
 	createFloatingFrame("dEdit_secondary", 320, 440, {"offset": "center"});
-	// Inject HTML into frame
-	loadHtmlTemplate($("#dEdit_secondary_content"), "coui://ui/mods/DirectEdit/panel_secondary.html");
-	// Make sure it hides correctly
+	
+	// Inject HTML and apply bindings
+	loadHtmlTemplate($("#dEdit_primary_content"),"coui://ui/mods/DirectEdit/res/panel_main.html");
+	loadHtmlTemplate($("#dEdit_secondary_content"),"coui://ui/mods/DirectEdit/res/panel_secondary.html");
+	
+	
+	// Set CSS
+	$("#dEdit_primary_content").attr("class","dEdit_base");
+	$("#dEdit_secondary_content").attr("class","dEdit_base");
+	// Hide
 	$("#dEdit_secondary").attr("data-bind","visible: dEdit.display.secondary.active");
 })();
 

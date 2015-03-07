@@ -21,7 +21,7 @@ dEdit.api.registerSpawnTool(
 				return cl;
 			};
 			
-			return op;
+			return fn;
 		}
 	}
 );

@@ -1,0 +1,31 @@
+<script>
+$(function() {
+	loadHtmlTemplate($("#dEdit_planetDetail"),"coui://ui/mods/DirectEdit/res/planetDetail.html");
+});
+</script>
+<div id="dEdit_label">
+	<span class="dEdit_title">DirectEdit</span>
+	<span style="width: 20px"></span>
+	<span class="dEdit_version" data-bind="text: dEdit.version"></span>
+</div>
+<div id="dEdit_planetSelect">
+	<table>
+		<tr>
+			<td>
+				<select style="height:22px; width:210px" data-bind="options: dEdit.listPlanets, optionsText: function(item) { return item.name; }, value: dEdit.selectedPlanet">
+				</select>
+			</td>
+			<td style="text-align:right">
+				<button style="height:22px; width:80px" onclick="dEdit.readSelectedPlanet()" data-bind="enable: dEdit.canRead">
+					Read
+				</button>
+			</td>
+		</tr>
+	</table>
+</div>
+<div id="dEdit_planetDetail"></div>
+<div id="dEdit_planetCommit">
+	<button style="width:80px" onclick="dEdit.writePlanet()" data-bind="enable: dEdit.hasPlanet">
+		Write
+	</button>
+</div>

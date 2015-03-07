@@ -2,7 +2,7 @@ dEdit.api.registerPlanetTool(
 	{
 		label: "Resize",
 		description: "Change the planet's radius and adjust CSG, metal spots and landing zones appropriately.",
-		warning: "May need manual adjustment on planets with random heightmaps",
+		warning: "May need manual adjustment on planets with random heightmaps.",
 		
 		activeFields: {num_add: "New radius"},
 		

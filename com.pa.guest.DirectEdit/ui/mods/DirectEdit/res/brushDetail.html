@@ -1,0 +1,199 @@
+<div>
+	<table class="dEdit_tabSelect">
+		<tr>
+			<!-- ko foreach: dEdit.display.secondary.brushDetailTabs.tabs -->
+			<td class="dEdit_tab" data-bind="text: label, css: {dEdit_selectedTab: isSelected()}, click: $root.dEdit.display.secondary.brushDetailTabs.selectTab"></td>
+			<!-- /ko -->
+			<td class="dEdit_hide" data-bind="click: dEdit.display.secondary.hide">X</td>
+		</tr>
+	</table>
+	<div class="dEdit_tabContent dEdit_brushBox dEdit_itemDetail">
+		<div data-bind="visible: dEdit.display.secondary.brushDetailTabs.tabs()[0].isSelected">
+			<div class="dEdit_itemProperties">
+				<table data-bind="visible: dEdit.currentSpec.brushList.selectionManager.items().length === 1">
+					<tr>
+						<td>Model</td>
+						<td class="dEdit_inputCell"><input type="text" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.brushList.selectionManager.current().spec"></input></td>
+					</tr>
+					<tr>
+						<td>Projection Type</td>
+						<td class="dEdit_inputCell">
+							<select data-bind="value: dEdit.currentSpec.brushList.selectionManager.current().proj">
+								<option value="BP_None">None</option>
+								<option value="BP_Bend">Bend</option>
+								<option value="BP_Arch">Arch</option>
+								<option value="BP_Longitude">Longitude</option>
+								<option value="BP_LongitudePinch">LongitudePinch</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Operation</td>
+						<td class="dEdit_inputCell">
+							<select data-bind="value: dEdit.currentSpec.brushList.selectionManager.current().op">
+								<option value="BO_Add">Add</option>
+								<option value="BO_Subtract">Subtract</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Rotation</td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.brushPropAliases.psi"></input></td>
+					</tr>
+					<tr>
+						<td>Scale<span class="dEdit_xyz">(x)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.brushList.selectionManager.current().scale[0]"></input></td>
+					</tr>
+					<tr>
+						<td><span class="dEdit_xyz">(y)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.brushList.selectionManager.current().scale[1]"></input></td>
+					</tr>
+					<tr>
+						<td><span class="dEdit_xyz">(z)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.brushList.selectionManager.current().scale[2]"></input></td>
+					</tr>
+					<tr>
+						<td>Height</td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.brushList.selectionManager.current().height"></input></td>
+					</tr>
+					<tr>
+						<td>Position<span class="dEdit_xyz">(x)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.brushList.selectionManager.current().position[0]"></input></td>
+					</tr>
+					<tr>
+						<td><span class="dEdit_xyz">(y)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.brushList.selectionManager.current().position[1]"></input></td>
+					</tr>
+					<tr>
+						<td><span class="dEdit_xyz">(z)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.brushPropAliases.z"></input></td>
+					</tr>
+					<tr>
+						<td>Mirrored</td>
+						<td class="dEdit_inputCell"><input type="checkbox" data-bind="checked: dEdit.staticVars.brushPropAliases.orientationReversed"></input></td>
+					</tr>
+					<tr>
+						<td>Pathable</td>
+						<td class="dEdit_inputCell"><input type="checkbox" data-bind="checked: dEdit.currentSpec.brushList.selectionManager.current().pathable"></input></td>
+					</tr>
+					<tr>
+						<td>Mergeable</td>
+						<td class="dEdit_inputCell"><input type="checkbox" data-bind="checked: dEdit.currentSpec.brushList.selectionManager.current().mergeable"></input></td>
+					</tr>
+					<tr>
+						<td>No Features</td>
+						<td class="dEdit_inputCell"><input type="checkbox" data-bind="checked: dEdit.currentSpec.brushList.selectionManager.current().no_features"></input></td>
+					</tr>
+				</table>
+				<div class="dEdit_note" data-bind="visible: dEdit.currentSpec.brushList.selectionManager.items().length > 1">
+					<span data-bind="text: dEdit.currentSpec.brushList.selectionManager.items().length"></span> brushes selected. Changes will be applied to all selected brushes.
+				</div>
+			</div>
+			<div class="dEdit_buttonTable">
+				<table>
+					<tr>
+						<td><button data-bind="click: dEdit.currentSpec.brushList.selectionManager.cloneAll">Clone</button></td>
+						<td><button data-bind="click: dEdit.currentSpec.brushList.selectionManager.removeAll">Delete</button></td>
+					</tr>
+					<tr>
+						<td><button data-bind="click: dEdit.currentSpec.brushList.selectionManager.shiftUpAll">Shift up</button></td>
+						<td><button data-bind="click: dEdit.currentSpec.brushList.selectionManager.shiftDownAll">Shift down</button></td>
+					</tr>
+					<tr>
+						<td><button data-bind="click: dEdit.currentSpec.brushList.selectionManager.joinUp, enable: dEdit.currentSpec.brushList.selectionManager.items().length > 1">Join up</button></td>
+						<td><button data-bind="click: dEdit.currentSpec.brushList.selectionManager.joinDown, enable: dEdit.currentSpec.brushList.selectionManager.items().length > 1">Join down</button></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div data-bind="visible: dEdit.display.secondary.brushDetailTabs.tabs()[1].isSelected">
+			<div class="dEdit_itemTools">
+				<select style="width:100%" data-bind="options: dEdit.brushTools.tools, optionsText: function(item) { return item.label; }, value: dEdit.brushTools.selectedType"></select>
+				<div class="dEdit_note" data-bind="text: dEdit.brushTools.selectedType().author"></div>
+				<div class="dEdit_note" data-bind="text: dEdit.brushTools.selectedType().description"></div>
+				<div class="dEdit_warn" data-bind="text: dEdit.brushTools.selectedType().warning"></div>
+					<!-- TODO: avoid hard-coded fields-->
+				<table>
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.num_angle">
+						<td><span data-bind="text: dEdit.brushTools.selectedType().activeFields.num_angle"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_angle"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.num_add">
+						<td><span data-bind="text: dEdit.brushTools.selectedType().activeFields.num_add"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_add"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.num_mult">
+						<td><span data-bind="text: dEdit.brushTools.selectedType().activeFields.num_add"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_add"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.num_mean">
+						<td><span data-bind="text: dEdit.brushTools.selectedType().activeFields.num_mean"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_mean"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.num_sd">
+						<td><span data-bind="text: dEdit.brushTools.selectedType().activeFields.num_sd"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_sd"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.num_min">
+						<td><span data-bind="text: dEdit.brushTools.selectedType().activeFields.num_min"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_min"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.num_max">
+						<td><span data-bind="text: dEdit.brushTools.selectedType().activeFields.num_max"></span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.num_max"></input></td>
+					</tr>
+					
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.vec_direction">
+						<td><span data-bind="text: dEdit.brushTools.selectedType().activeFields.vec_direction"></span><span class="dEdit_xyz">(x)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_direction[0]"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.vec_direction">
+						<td><span class="dEdit_xyz">(y)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_direction[1]"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.vec_direction">
+						<td><span class="dEdit_xyz">(z)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_direction[2]"></input></td>
+					</tr>
+					
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.vec_scaling">
+						<td><span data-bind="text: dEdit.brushTools.selectedType().activeFields.vec_scaling"></span><span class="dEdit_xyz">(x)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_scaling[0]"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.vec_scaling">
+						<td><span class="dEdit_xyz">(y)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_scaling[1]"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.vec_scaling">
+						<td><span class="dEdit_xyz">(z)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_scaling[2]"></input></td>
+					</tr>
+					
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.vec_translate">
+						<td><span data-bind="text: dEdit.brushTools.selectedType().activeFields.vec_translate"></span><span class="dEdit_xyz">(x)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_translate[0]"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.vec_translate">
+						<td><span class="dEdit_xyz">(y)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_translate[1]"></input></td>
+					</tr>
+					<tr data-bind="visible: dEdit.brushTools.selectedType().activeFields.vec_translate">
+						<td><span class="dEdit_xyz">(z)</span></td>
+						<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.staticVars.toolFields.vec_translate[2]"></input></td>
+					</tr>
+				</table>
+				<div class="dEdit_note" data-bind="visible: dEdit.currentSpec.brushList.selectionManager.items().length > 1">
+					<span data-bind="text: dEdit.currentSpec.brushList.selectionManager.items().length"></span> brushes selected. Tools will be applied to all selected brushes.
+				</div>
+			</div>
+			<div class="dEdit_buttonTable">
+				<table>
+					<tr>
+						<td><button data-bind="click: function(){dEdit.currentSpec.brushList.selectionManager.applyToolToAll(model.dEdit.brushTools.getApplicable());}, enable: dEdit.brushTools.isReady">Apply</button></td>
+						<td><button data-bind="click: function(){dEdit.currentSpec.brushList.selectionManager.cloneToolToAll(model.dEdit.brushTools.getApplicable());}, enable: dEdit.brushTools.isReady">Clone & Apply</button></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
