@@ -99,6 +99,22 @@
 					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.planet.landingZoneSize"></input></td>
 				</tr>
 				<tr>
+					<td>Respawn</td>
+					<td class="dEdit_inputCell"><input type="checkbox" data-bind="checked: dEdit.currentSpec.respawn"></input></td>
+				</tr>
+				<tr>
+					<td>Start Destroyed</td>
+					<td class="dEdit_inputCell"><input type="checkbox" data-bind="checked: dEdit.currentSpec.start_destroyed"></input></td>
+				</tr>
+				<tr>
+					<td>Min Spawn Delay</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.min_spawn_delay"></input></td>
+				</tr>
+				<tr>
+					<td>Max Spawn Delay</td>
+					<td class="dEdit_inputCell"><input type="number" data-bind="valueUpdate: 'afterkeydown', value: dEdit.currentSpec.max_spawn_delay"></input></td>
+				</tr>
+				<tr>
 					<td>Symmetry Type</td>
 					<td class="dEdit_inputCell"><select data-bind="options: symmetryTypes, value: dEdit.currentSpec.planet.symmetryType"></select></td>
 				</tr>
@@ -228,7 +244,7 @@
 			<div class="dEdit_buttonTable">
 				<table>
 					<tr>
-						<td><button style="width: 100%" data-bind="click: function(){dEdit.applyPlanetTool;}, enable: dEdit.planetTools.isReady">Apply</button></td>
+						<td><button style="width: 100%" data-bind="click: function(){dEdit.applyPlanetTool();}, enable: dEdit.planetTools.isReady">Apply</button></td>
 					</tr>
 				</table>
 			</div>

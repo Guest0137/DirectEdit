@@ -14,6 +14,11 @@ model.dEdit.currentSpec = new function() {
 	self.required_thrust_to_move = ko.observable();
 	self.starting_planet = ko.observable();
 	
+	self.respawn = ko.observable();
+	self.start_destroyed = ko.observable();
+	self.min_spawn_delay = ko.observable();
+	self.max_spawn_delay = ko.observable();
+	
 	self.planet = {
 		seed: ko.observable(),
 		radius: ko.observable(),
@@ -75,6 +80,11 @@ model.dEdit.currentSpec = new function() {
 		// numArmies is display stuff? not sure
 		setOrDefault(self.planet.landingZonesPerArmy,	self.original.planet.landingZonesPerArmy,	1);
 		setOrDefault(self.planet.landingZoneSize,		self.original.planet.landingZoneSize,		100);
+		
+		setOrDefault(self.respawn,						self.original.respawn,						false);
+		setOrDefault(self.start_destroyed,				self.original.start_destroyed,				false);
+		setOrDefault(self.min_spawn_delay,				self.original.min_spawn_delay,				0);
+		setOrDefault(self.max_spawn_delay,				self.original.max_spawn_delay,				0);
 		
 		// Try to read brushes
 		if(typeof self.original.planetCSG !== "undefined") {
@@ -172,6 +182,11 @@ model.dEdit.currentSpec = new function() {
 		spec.planet.symmetricalStarts	 = self.planet.symmetricalStarts();
 		spec.planet.landingZonesPerArmy	 = Math.ceil(self.planet.landingZonesPerArmy());
 		spec.planet.landingZoneSize		 = Math.ceil(self.planet.landingZoneSize());
+		
+		spec.respawn					 = self.respawn();
+		spec.start_destroyed			 = self.start_destroyed();
+		spec.min_spawn_delay			 = Math.ceil(self.min_spawn_delay());
+		spec.max_spawn_delay			 = Math.ceil(self.max_spawn_delay());
 		
 		if(typeof spec.source === "undefined") {
 			spec.source = {};
